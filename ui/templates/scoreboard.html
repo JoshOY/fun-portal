@@ -4,10 +4,52 @@
   <div class="columns">
     <div class="section">
       <div class="section__header">
-        <h1 class="section__title">Hello World!</h1>
+        <h1 class="section__title">Current Scoreboard</h1>
       </div>
-      <div class="section__body">
-        <p>Scoreboard Coming Soon!</p>
+      <div class="section__body no-padding">
+        <table class="data-table">
+          <colgroup>
+            <col class="col--rank">
+            <col class="col--user">
+            <col class="col--score">
+            <col class="col--wins">
+            <col class="col--loses">
+            <col class="col--draws">
+            <col class="col--submission">
+          </colgroup>
+          <thead>
+            <tr>
+              <th class="col--rank">Rank</th>
+              <th class="col--user">User</th>
+              <th class="col--score">Score</th>
+              <th class="col--wins">Win</th>
+              <th class="col--loses">Lose</th>
+              <th class="col--draws">Draw</th>
+              <th class="col--submission">Submission</th>
+            </tr>
+          </thead>
+          <tbody>
+          {% for row in sbdoc %}
+            <tr>
+              <td class="col--rank">#{{ row.order }}</td>
+              <td class="col--user">{{ row.user.profile.displayName }}</td>
+              <td class="col--score">{{ row.score }}</td>
+              <td class="col--wins">{{ row.win }}</td>
+              <td class="col--loses">{{ row.lose }}</td>
+              <td class="col--draws">{{ row.draw }}</td>
+              <td class="col--submission">
+              {% if row.submission %}
+                <a class="typo-a" href="{{ url('/submission/{0}', false, [row.submission]) }}">
+                  View
+                </a>
+              {% else %}
+                --
+              {% endif %}
+              </td>
+            </tr>
+          {% endfor %}
+          </tbody>
+        </table>
       </div>
     </div>
   </div>
