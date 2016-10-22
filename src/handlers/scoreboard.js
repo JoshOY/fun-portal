@@ -14,8 +14,11 @@ export default class Handler {
   @web.get('/')
   @web.middleware(utils.checkPermission(permissions.VIEW_SCOREBOARD))
   async getScoreboardAction(req, res) {
+    const sbdoc = await DI.models.Scoreboard.getScoreboardAsync();
+    console.log(sbdoc);
     res.render('scoreboard', {
       page_title: 'Scoreboard',
+      sbdoc,
     });
   }
 }

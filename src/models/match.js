@@ -402,20 +402,18 @@ export default () => {
 
   /**
    * Given a list of allowed submissions _id, return all useable matches.
-   * @return { [MatchModel] }
-   * @param allowedSubmissionIds { [ObjectId] }
+   * @param {[ObjectId]} allowedSubmissionIds
+   * @return {[Match]}
    */
-  MatchSchema.statics.getPairwiseMatchesForSubmissionsAsync = async function(allowedSubmissionIds) {
-    return await this
-      .find({
-        u1Submission: {
-          $in: allowedSubmissionIds,
-        },
-        u2Submission: {
-          $in: allowedSubmissionIds,
-        },
-      })
-      .exec();
+  MatchSchema.statics.getPairwiseMatchesForSubmissionsAsync = async function (allowedSubmissionIds) {
+    return await Match.find({
+      u1Submission: {
+        $in: allowedSubmissionIds,
+      },
+      u2Submission: {
+        $in: allowedSubmissionIds,
+      },
+    }).exec();
   };
 
   MatchSchema.index({ u1Submission: 1, u2Submission: -1 }, { unique: true });
