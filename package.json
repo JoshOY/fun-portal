@@ -10,7 +10,9 @@
     "build:ui:dev": "gulp fe:iconfont && webpack --progress --colors --display-error-details --bail",
     "build:ui": "npm run build:ui:dev -- --optimize-minimize",
     "watch:server": "gulp clean:server && gulp",
-    "watch:ui": "npm run build:ui:dev -- --watch"
+    "watch:ui": "npm run build:ui:dev -- --watch",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "dependencies": {
     "app-module-path": "^2.0.0",
@@ -60,7 +62,8 @@
     "timeago.js": "^2.0.2",
     "uuid": "^2.0.3",
     "validator": "^6.0.0",
-    "winston": "^2.2.0"
+    "winston": "^2.2.0",
+    "snyk": "^1.41.1"
   },
   "devDependencies": {
     "autoprefixer": "^6.5.0",
@@ -106,5 +109,6 @@
       "transform-runtime",
       "transform-decorators-legacy"
     ]
-  }
+  },
+  "snyk": true
 }
